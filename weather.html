@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Previsão do Tempo</title>
+    <link rel="stylesheet" href="weather-styles.css">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="weather-app">
+            <h1>🌤️ Dashboard de Previsão do Tempo</h1>
+            
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Digite o nome da cidade..." 
+                    class="city-input"
+                >
+                <button id="searchBtn" class="search-btn">Buscar</button>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <p>Carregando...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div id="weatherContent" class="weather-content" style="display: none;">
+                <div class="current-weather">
+                    <div class="city-info">
+                        <h2 id="cityName"></h2>
+                        <p id="date"></p>
+                    </div>
+                    
+                    <div class="weather-main">
+                        <div class="temperature-section">
+                            <span id="temperature" class="temperature"></span>
+                            <img id="weatherIcon" class="weather-icon" alt="Ícone do tempo">
+                        </div>
+                        <div class="weather-description">
+                            <p id="description"></p>
+                            <p id="feelsLike"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-card">
+                        <span class="detail-label">💧 Umidade</span>
+                        <span id="humidity" class="detail-value"></span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">💨 Vento</span>
+                        <span id="windSpeed" class="detail-value"></span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">🔽 Pressão</span>
+                        <span id="pressure" class="detail-value"></span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="detail-label">👁️ Visibilidade</span>
+                        <span id="visibility" class="detail-value"></span>
+                    </div>
+                </div>
+
+                <div class="forecast-section">
+                    <h3>Previsão dos Próximos 5 Dias</h3>
+                    <div id="forecast" class="forecast-container"></div>
+                </div>
+            </div>
+
+            <div class="favorites">
+                <h3>Cidades Favoritas</h3>
+                <div id="favoritesList" class="favorites-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="weather-script.js"></script>
+</body>
+</html>
