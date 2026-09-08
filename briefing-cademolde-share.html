@@ -161,6 +161,10 @@
       justify-content: center;
       margin: 0 auto 14px;
     }
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -281,32 +285,44 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbwi3dADa8dXojrLWFOlfvj0ECVOt5zIyfePIeyRYryMMS3diNeSERUWFTEoS9Yx78p2Bw/exec';
 
+    const form = document.getElementById('briefingForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    const successBox = document.getElementById('successBox');
+
     document.querySelectorAll('.option').forEach(option => {
       option.addEventListener('click', () => {
         const parent = option.parentElement;
-        parent.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
-        option.classList.add('selected');
+        const isRadioGroup = parent.classList.contains('options');
+
+        if (isRadioGroup) {
+          parent.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+        }
+
+        option.classList.toggle('selected');
       });
     });
 
-    document.getElementById('briefingForm').addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
       const payload = { timestamp: new Date().toISOString() };
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card, index) => {
-        const question = card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`;
+
+      form.querySelectorAll('.card').forEach((card, index) => {
+        const questionText = card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`;
         const selected = Array.from(card.querySelectorAll('.option.selected')).map(el => el.textContent.trim());
-        const textarea = card.querySelector('textarea');
-        payload[question] = selected.length ? selected : (textarea ? textarea.value.trim() : '');
+        const textArea = card.querySelector('textarea');
+        const value = selected.length ? selected : (textArea ? textArea.value.trim() : '');
+        payload[questionText] = value;
       });
 
-      const btn = document.getElementById('submitBtn');
-      const statusMsg = document.getElementById('statusMsg');
-      btn.disabled = true;
+      submitBtn.disabled = true;
       statusMsg.textContent = 'Enviando respostas...';
 
       try {
+        if (API_URL.includes('SEU_ID')) {
+          throw new Error('URL do Apps Script ainda não foi configurada.');
+        }
+
         const response = await fetch(API_URL, {
           method: 'POST',
           mode: 'cors',
@@ -315,18 +331,17 @@
         });
 
         if (!response.ok) {
-          throw new Error('Erro ao enviar');
+          throw new Error('Erro na requisição');
         }
 
-        document.getElementById('briefingForm').style.display = 'none';
-        document.getElementById('successBox').classList.add('show');
+        form.style.display = 'none';
+        successBox.classList.add('show');
         statusMsg.textContent = '';
       } catch (error) {
-        statusMsg.textContent = 'Não foi possível enviar agora. Verifique a URL do Apps Script e publique o Web App como “Qualquer pessoa”.';
-        btn.disabled = false;
+        statusMsg.textContent = 'Ainda falta configurar a URL pública para salvar as respostas. Siga as instruções do README.';
+        submitBtn.disabled = false;
       }
     });
   </script>
 </body>
 </html>
-
