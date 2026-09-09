@@ -21,7 +21,21 @@ function doGet() {
 
 function doPost(e) {
   try {
-    const payload = JSON.parse(e.postData && e.postData.contents ? e.postData.contents : '{}');
+    const rawBody = e.postData && e.postData.contents ? e.postData.contents : '{}';
+    let payload = {};
+
+    try {
+      payload = JSON.parse(rawBody);
+    } catch (parseError) {
+      payload = {};
+      if (rawBody && rawBody.trim()) {
+        try {
+          payload = JSON.parse(rawBody.replace(/^\s*\{/, '{').replace(/\}\s*$/, '}'));
+        } catch (fallbackError) {
+          payload = { rawBody };
+        }
+      }
+    }
 
     if (!payload || Object.keys(payload).length === 0) {
       return ContentService

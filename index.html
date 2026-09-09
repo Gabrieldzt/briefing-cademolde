@@ -391,21 +391,19 @@
       submitBtn.disabled = true;
       statusMsg.textContent = 'Enviando respostas...';
 
-      try {
-        if (API_URL.includes('SEU_ID')) {
-          throw new Error('URL do Apps Script ainda não foi configurada.');
-        }
+      if (API_URL.includes('SEU_ID')) {
+        statusMsg.textContent = 'Ainda falta configurar a URL pública para salvar as respostas. Siga as instruções do README.';
+        submitBtn.disabled = false;
+        return;
+      }
 
-        const response = await fetch(API_URL, {
+      try {
+        await fetch(API_URL, {
           method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-
-        if (!response.ok) {
-          throw new Error('Erro na requisição');
-        }
 
         form.style.display = 'none';
         successBox.classList.add('show');
