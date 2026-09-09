@@ -1,3 +1,18 @@
+const SPREADSHEET_ID = '1Ep94UgkX60ha5E_30b7aO3DMgsPFtBKoamedhYni4Y0';
+
+function getSpreadsheet() {
+  if (SPREADSHEET_ID && SPREADSHEET_ID !== 'COLE_AQUI_O_ID_DA_PLANILHA') {
+    return SpreadsheetApp.openById(SPREADSHEET_ID);
+  }
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) {
+    return active;
+  }
+
+  throw new Error('Nenhuma planilha vinculada. Configure o SPREADSHEET_ID no Apps Script.');
+}
+
 function doGet() {
   return ContentService
     .createTextOutput(JSON.stringify({ ok: true, message: 'Briefing ativo.' }))
@@ -14,7 +29,7 @@ function doPost(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const spreadsheet = getSpreadsheet();
     let sheet = spreadsheet.getSheetByName('Respostas');
 
     if (!sheet) {

@@ -357,7 +357,7 @@
   </div>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbwi3dADa8dXojrLWFOlfvj0ECVOt5zIyfePIeyRYryMMS3diNeSERUWFTEoS9Yx78p2Bw/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxxuRn-17C6Cg6QiGgaHtbo08s5iBr2L7CA52u-I9RILlJ2nmI1035-WGBFx6QZVb7A_Q/exec';
 
     const form = document.getElementById('briefingForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -375,18 +375,13 @@
       const payload = { timestamp: new Date().toISOString() };
 
       form.querySelectorAll('.card').forEach((card, index) => {
-        const questionText = card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`;
-        const selected = Array.from(card.querySelectorAll('.option.selected')).map(el => el.textContent.trim());
+        const questionText = (card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`).replace(/\s+/g, ' ').trim();
+        const selected = Array.from(card.querySelectorAll('.option.selected')).map(el => el.textContent.trim()).filter(Boolean);
         const customInput = card.querySelector('.custom-answer');
         const customText = customInput ? customInput.value.trim() : '';
+        const answerValue = selected.length > 0 ? selected.join('; ') : customText;
 
-        if (selected.length > 0) {
-          payload[questionText] = selected.join('; ');
-        } else if (customText) {
-          payload[questionText] = customText;
-        } else {
-          payload[questionText] = '';
-        }
+        payload[questionText] = answerValue || '';
 
         if (customText) {
           payload[`${questionText} - Observação`] = customText;
