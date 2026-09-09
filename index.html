@@ -64,6 +64,12 @@
       color: var(--navy);
       margin-bottom: 10px;
     }
+    .subtitle {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0 0 14px;
+      font-size: 15px;
+    }
     .options {
       display: flex;
       flex-direction: column;
@@ -88,22 +94,28 @@
       background: #fff8f2;
     }
     .radio-mark {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
       border: 2px solid var(--muted);
       position: relative;
       flex-shrink: 0;
+      background: #fff;
     }
     .option.selected .radio-mark {
       border-color: var(--orange);
+      background: #fff8f2;
     }
     .option.selected .radio-mark::after {
       content: "";
       position: absolute;
-      inset: 3px;
-      background: var(--orange);
-      border-radius: 50%;
+      left: 5px;
+      top: 1px;
+      width: 5px;
+      height: 10px;
+      border: solid var(--orange);
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
     }
     textarea, input {
       width: 100%;
@@ -114,7 +126,10 @@
       font: inherit;
       background: #fcfbf9;
     }
-    textarea { min-height: 90px; }
+    textarea {
+      min-height: 90px;
+      margin-top: 12px;
+    }
     .submit-area {
       text-align: center;
       margin-top: 20px;
@@ -166,103 +181,166 @@
 <body>
   <div class="wrap">
     <div class="header">
-      <div class="badge">CADEMOLDE</div>
-      <h1>Briefing inicial do site</h1>
-      <p>Para facilitar a sua resposta, respondendo esse formulário você ajuda a orientar a primeira versão do site com mais precisão.</p>
+      <div class="badge">CADEMOLDE — MOLDES E MATRIZES</div>
+      <h1>Algumas perguntas para deixar o seu site do jeito certo</h1>
+      <p>Para começar a construir o site vamos primeiro montar uma primeira versão mais simples — com só o que é essencial para você já poder mostrar a empresa, receber pedidos de orçamento e testar se está funcionando bem.</p>
+      <p>Para acertar o que entra nessa primeira versão, ficaram algumas dúvidas depois do formulário que você já respondeu. São perguntas rápidas — a maioria é só clicar na opção que combina mais com o que você quer. Em cada uma tem um campo para você escrever, caso a resposta pronta não combine com o que você pensa.</p>
     </div>
 
     <form id="briefingForm">
       <div class="card">
-        <div class="question">1. Você quer que o cliente consiga criar uma conta no site?</div>
+        <div class="question">01 — CRIAR CONTA NO SITE</div>
+        <p class="subtitle">Você quer que o visitante do site consiga criar uma conta (com login e senha)? Isso é diferente de só preencher o formulário de orçamento. É tipo quando você entra num site e ele pede para “criar uma conta” para guardar seus dados e você poder voltar depois.</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>Não precisa agora, pode ficar para uma versão futura.</span></label>
-          <label class="option"><span class="radio-mark"></span><span>Quero algo simples, só para salvar nome e e-mail.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Quero algo simples, só para guardar nome e e-mail.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Quero que o cliente veja o histórico dos orçamentos.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">2. Como você imagina o agendamento de atendimento?</div>
+        <div class="question">02 — MARCAR UM ATENDIMENTO</div>
+        <p class="subtitle">Você disse que quer que o cliente consiga “marcar um atendimento” pelo site. Como você imagina isso na prática?</p>
         <div class="options">
-          <label class="option"><span class="radio-mark"></span><span>Cliente escolhe dia e horário no próprio orçamento, depois a equipe confirma.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Cliente escolhe dia e horário no próprio orçamento e a equipe confirma.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Quero ver horários realmente livres da agenda.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Botão que abre o WhatsApp para marcar direto.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Prefiro que a empresa marque diretamente por telefone ou WhatsApp.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">3. Quais informações devem constar no pedido de orçamento?</div>
+        <div class="question">03 — PEDIDO DE ORÇAMENTO</div>
+        <p class="subtitle">Quando alguém for pedir um orçamento pelo site, quais informações você precisa que essa pessoa preencha? Pense como se fosse uma ficha rápida: o que você precisa saber sobre a peça para poder dar um preço?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>Tipo de peça ou molde.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Material da peça.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Quantidade.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Prazo de entrega.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Arquivo ou desenho anexo.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Dimensões ou medidas.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Falta alguma informação na lista? Escreva aqui (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">4. Como você quer receber o aviso de novo pedido?</div>
+        <div class="question">04 — AVISO DE NOVO PEDIDO</div>
+        <p class="subtitle">Quando alguém pedir um orçamento pelo site, como você quer ficar sabendo que chegou um pedido novo?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>E-mail.</span></label>
           <label class="option"><span class="radio-mark"></span><span>WhatsApp automático.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Não precisa avisar automaticamente.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Quero receber por outro canal.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">5. Depois de enviar o orçamento, o cliente deve receber confirmação?</div>
+        <div class="question">05 — CONFIRMAÇÃO PARA O CLIENTE</div>
+        <p class="subtitle">Depois que o cliente enviar o pedido de orçamento, ele deve receber alguma mensagem confirmando que o pedido chegou certinho?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>Sim, por e-mail.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Sim, por WhatsApp.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Não precisa, a empresa entra em contato depois.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">6. Quem vai escrever os textos do site?</div>
+        <div class="question">06 — TEXTOS DO SITE</div>
+        <p class="subtitle">Todo site precisa de textos contando quem é a empresa e o que ela faz. Quem vai escrever esses textos?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>A equipe escreve com base no que já sabe.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Eu escrevo e envio o texto pronto.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Prefiro revisar junto.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">7. Você tem fotos da empresa ou de peças já fabricadas?</div>
+        <div class="question">07 — FOTOS DA EMPRESA</div>
+        <p class="subtitle">Você tem fotos da fábrica, das máquinas ou de peças que já foram feitas, mesmo que sejam simples, tiradas de celular?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>Sim, tenho fotos boas.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Tenho algumas, mas são simples.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Não tenho nenhuma foto ainda.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">8. Você tem exemplos de trabalhos realizados para mostrar em portfólio?</div>
+        <div class="question">08 — TRABALHOS JÁ FEITOS</div>
+        <p class="subtitle">Você tem pelo menos 3 exemplos de peças ou moldes que a Cademolde já fabricou, para mostrar no site como uma “vitrine” dos seus trabalhos?</p>
         <div class="options">
           <label class="option"><span class="radio-mark"></span><span>Sim, já tenho exemplos separados.</span></label>
-          <label class="option"><span class="radio-mark"></span><span>Tenho só 1 ou 2 exemplos.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Tenho 1 ou 2 exemplos.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Não tenho nenhum exemplo pronto.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">9. Há algum exemplo de site que você gosta? Você pode nos indicar um link ou descrever o estilo.</div>
-        <textarea id="siteReference" placeholder="Ex.: gosto de um site com fotos grandes, visual limpo e poucas cores..."></textarea>
-      </div>
-
-      <div class="card">
-        <div class="question">10. Quem vai atualizar o site depois que ele for publicado?</div>
+        <div class="question">09 — EXEMPLOS DE VISUAL</div>
+        <p class="subtitle">Existe algum site — de qualquer área — que você acha bonito e gostaria de usar como exemplo do estilo que imagina para o seu? Pode colar o link do site ou só descrever o que você gosta nele (as cores, o jeito que mostra as fotos, etc).</p>
         <div class="options">
-          <label class="option"><span class="radio-mark"></span><span>Posso pedir para a equipe sempre que precisar.</span></label>
-          <label class="option"><span class="radio-mark"></span><span>Prefiro editar fotos e textos eu mesmo.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Sim, tenho referência visual.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Estou em dúvida, mas tenho alguma ideia.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Ainda não tenho referência.</span></label>
+        </div>
+        <textarea class="custom-answer" placeholder="Pode colar o link do site ou explicar o estilo que você gosta. (opcional)"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="question">10 — APARECER NO GOOGLE</div>
+        <p class="subtitle">Você já tem um cadastro da Cademolde no Google (aquele perfil que aparece com endereço, telefone e mapa quando alguém pesquisa o nome da empresa)?</p>
+        <div class="options">
+          <label class="option"><span class="radio-mark"></span><span>Sim, já tenho cadastro.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Quero criar ou melhorar o perfil.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Ainda não tenho.</span></label>
+        </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="question">11 — DEPOIS QUE O SITE FICAR PRONTO</div>
+        <p class="subtitle">Depois que o site estiver no ar, quem vai ficar responsável por manter ele atualizado (trocar fotos, adicionar novos trabalhos no portfólio, etc)?</p>
+        <div class="options">
+          <label class="option"><span class="radio-mark"></span><span>A equipe da empresa.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Eu mesmo vou atualizar.</span></label>
           <label class="option"><span class="radio-mark"></span><span>Ainda não pensei nisso.</span></label>
         </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
       </div>
 
       <div class="card">
-        <div class="question">11. Observações finais</div>
-        <textarea id="notes" placeholder="Ficou faltando algo? Escreva aqui..."></textarea>
+        <div class="question">12 — COMO SEUS CLIENTES ACESSAM</div>
+        <p class="subtitle">Pensando nas empresas que vão visitar o site (seus clientes são outras empresas), você acha que elas vão acessar mais pelo computador do escritório ou pelo celular?</p>
+        <div class="options">
+          <label class="option"><span class="radio-mark"></span><span>Mais pelo computador.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Mais pelo celular.</span></label>
+          <label class="option"><span class="radio-mark"></span><span>Os dois igualmente.</span></label>
+        </div>
+        <textarea class="custom-answer" placeholder="Quer explicar melhor ou escrever algo diferente? (opcional)"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="question">13 — QUAL É O PÚBLICO-ALVO</div>
+        <p class="subtitle">Quem são as pessoas ou empresas que você quer atingir com o site? Pode ser clientes finais, empresas do setor, distribuidores, revendedores ou qualquer outro perfil.</p>
+        <textarea class="custom-answer" placeholder="Descreva o público-alvo ou o tipo de cliente que você quer atingir..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="question">14 — PRINCIPAIS PRODUTOS E SERVIÇOS</div>
+        <p class="subtitle">Quais produtos, serviços ou tipos de projetos você quer destacar no site para atrair clientes e mostrar o que sua empresa faz?</p>
+        <textarea class="custom-answer" placeholder="Descreva os principais produtos, serviços ou áreas de atuação..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="question">15 — OBSERVAÇÕES FINAIS</div>
+        <p class="subtitle">Ficou faltando algum material, informação ou ideia que você acha importante para o site e que não perguntamos aqui? Aproveite este espaço para descrever — por exemplo, algo que precisa ser anexado depois (catálogo, vídeo, certificado) ou qualquer outra coisa que você considera relevante.</p>
+        <textarea class="custom-answer" placeholder="Ficou faltando algum material, informação ou ideia? Escreva aqui..."></textarea>
       </div>
 
       <div class="submit-area">
@@ -281,32 +359,48 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbwi3dADa8dXojrLWFOlfvj0ECVOt5zIyfePIeyRYryMMS3diNeSERUWFTEoS9Yx78p2Bw/exec';
 
+    const form = document.getElementById('briefingForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    const successBox = document.getElementById('successBox');
+
     document.querySelectorAll('.option').forEach(option => {
       option.addEventListener('click', () => {
-        const parent = option.parentElement;
-        parent.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
-        option.classList.add('selected');
+        option.classList.toggle('selected');
       });
     });
 
-    document.getElementById('briefingForm').addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
       const payload = { timestamp: new Date().toISOString() };
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card, index) => {
-        const question = card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`;
+
+      form.querySelectorAll('.card').forEach((card, index) => {
+        const questionText = card.querySelector('.question')?.textContent || `Pergunta ${index + 1}`;
         const selected = Array.from(card.querySelectorAll('.option.selected')).map(el => el.textContent.trim());
-        const textarea = card.querySelector('textarea');
-        payload[question] = selected.length ? selected : (textarea ? textarea.value.trim() : '');
+        const customInput = card.querySelector('.custom-answer');
+        const customText = customInput ? customInput.value.trim() : '';
+
+        if (selected.length > 0) {
+          payload[questionText] = selected.join('; ');
+        } else if (customText) {
+          payload[questionText] = customText;
+        } else {
+          payload[questionText] = '';
+        }
+
+        if (customText) {
+          payload[`${questionText} - Observação`] = customText;
+        }
       });
 
-      const btn = document.getElementById('submitBtn');
-      const statusMsg = document.getElementById('statusMsg');
-      btn.disabled = true;
+      submitBtn.disabled = true;
       statusMsg.textContent = 'Enviando respostas...';
 
       try {
+        if (API_URL.includes('SEU_ID')) {
+          throw new Error('URL do Apps Script ainda não foi configurada.');
+        }
+
         const response = await fetch(API_URL, {
           method: 'POST',
           mode: 'cors',
@@ -315,15 +409,15 @@
         });
 
         if (!response.ok) {
-          throw new Error('Erro ao enviar');
+          throw new Error('Erro na requisição');
         }
 
-        document.getElementById('briefingForm').style.display = 'none';
-        document.getElementById('successBox').classList.add('show');
+        form.style.display = 'none';
+        successBox.classList.add('show');
         statusMsg.textContent = '';
       } catch (error) {
-        statusMsg.textContent = 'Não foi possível enviar agora. Verifique a URL do Apps Script e publique o Web App como “Qualquer pessoa”.';
-        btn.disabled = false;
+        statusMsg.textContent = 'Ainda falta configurar a URL pública para salvar as respostas. Siga as instruções do README.';
+        submitBtn.disabled = false;
       }
     });
   </script>
